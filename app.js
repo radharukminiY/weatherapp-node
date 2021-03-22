@@ -1,5 +1,5 @@
-import express from 'express'
-import request from 'request'
+var express = require('express');
+var request = require('request');
 const port =  7900;
 const app = express();
 
@@ -11,8 +11,8 @@ app.set('views', './views');
 app.set('view engine','ejs');
 
 app.get('/weather',(req,res) => {
-    const city = req.query.city?req.query.city:'Delhi'
-    const api = `http://api.openweathermap.org/data/2.5/forecast/daily?q=Paris&mode=json&units=metric&cnt=5&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
+    const city = req.query.city?req.query.city:'Paris'
+    const api = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&mode=json&units=metric&cnt=5&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
     request(api,(err,response)=>{
         if(err) throw err;
         const output = JSON.parse(response.body)
